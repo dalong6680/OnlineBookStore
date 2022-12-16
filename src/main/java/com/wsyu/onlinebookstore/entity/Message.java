@@ -8,8 +8,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 public class Message {
-    String message_id;
-    String user_id;
+    int message_id;
+    int user_id;
     String content;
     String status;
     Date message_date;

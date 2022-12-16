@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Book {
-    String book_id;
+    int book_id;
     String name;
     String writer;
     double price;

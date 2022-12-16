@@ -1,7 +1,7 @@
 package com.wsyu.onlinebookstore.initializer;
 
 import com.wsyu.onlinebookstore.config.MainConfiguration;
-import com.wsyu.onlinebookstore.config.MvcConfiguration;
+import com.wsyu.onlinebookstore.config.WebMvcConfiguration;
 import com.wsyu.onlinebookstore.config.MybatisConfiguration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -14,7 +14,7 @@ public class MvcInitializer extends AbstractAnnotationConfigDispatcherServletIni
     
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{MvcConfiguration.class};
+        return new Class[]{WebMvcConfiguration.class};
     }
     
     @Override

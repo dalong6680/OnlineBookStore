@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Cart {
-    String cart_id;
+    int cart_id;
     int serial_no;
-    String user_id;
-    String book_id;
+    int user_id;
+    int book_id;
     int count;
 }

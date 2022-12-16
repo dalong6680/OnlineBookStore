@@ -1,10 +1,7 @@
 package com.wsyu.onlinebookstore.mapper;
 
 import com.wsyu.onlinebookstore.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -13,12 +10,17 @@ public interface UserMapper {
     @Select("SELECT * FROM user")
     List<User> selectList();
     
-    @Insert("INSERT INTO user (`user_id`, `username`, `password`, `is_admin`) VALUES (#{user_id}, #{username}, #{password}, #{is_admin},)")
-    void register(@Param("user_id") String user_id,
-                  @Param("username") String username,
-                  @Param("password") String password,
-                  @Param("is_admin") String is_admin);
+    @Insert("INSERT INTO user (username, password, is_admin) VALUES (#{username}, #{password}, #{is_admin})")
+    void insert(@Param("username") String username,
+                @Param("password") String password,
+                @Param("is_admin") int is_admin);
     
-    @Select("SELECT `password` FROM user WHERE username = #{username}")
-    String getPasswordByUsername(String username);
+//    @Select("SELECT `password` FROM user WHERE username = #{username}")
+//    String selectPasswordByUsername(@Param("username") String username);
+    
+    @Select("SELECT * FROM user WHERE username = #{username}")
+    User selectUserByUsername(@Param("username") String username);
+    
+    @Update("UPDATE user SET password = #{password} WHERE username = #{username}")
+    void updateUserByUsername(@Param("username") String username, @Param("password") String password);
 }
