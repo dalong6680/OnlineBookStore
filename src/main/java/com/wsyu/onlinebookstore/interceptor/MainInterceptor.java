@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 public class MainInterceptor implements HandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         if (username == null) {

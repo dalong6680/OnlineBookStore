@@ -9,7 +9,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class Order {
     int order_id;
-    int serial_no;
     int user_id;
     int book_id;
     int count;

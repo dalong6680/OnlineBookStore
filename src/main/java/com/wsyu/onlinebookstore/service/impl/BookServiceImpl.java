@@ -19,12 +19,12 @@ public class BookServiceImpl implements BookService {
     }
     
     @Override
-    public List<Book> getAllBooks() {
-        return bookMapper.selectList();
+    public List<Book> getAllBookList() {
+        return bookMapper.selectAllBookList();
     }
     
     @Override
-    public List<Book> getBookByName(String name) {
-        return bookMapper.selectBookByName(name);
+    public List<Book> getBookListByName(String name) {
+        return bookMapper.selectBookListByName(name);
     }
 }

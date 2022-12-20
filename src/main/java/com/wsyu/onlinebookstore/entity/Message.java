@@ -11,6 +11,6 @@ public class Message {
     int message_id;
     int user_id;
     String content;
-    String status;
+    String reply;
     Date message_date;
 }

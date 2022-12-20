@@ -31,4 +31,9 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectUserByUsername(username);
         return user.getIs_admin() == 1;
     }
+    
+    @Override
+    public void changePassword(String username, String password) {
+        userMapper.updateUserByUsername(username, password);
+    }
 }

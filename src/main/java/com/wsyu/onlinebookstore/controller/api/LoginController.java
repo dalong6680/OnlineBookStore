@@ -1,7 +1,5 @@
 package com.wsyu.onlinebookstore.controller.api;
 
-import com.wsyu.onlinebookstore.entity.Book;
-import com.wsyu.onlinebookstore.service.BookService;
 import com.wsyu.onlinebookstore.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,15 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("/api")
 public class LoginController {
     @Resource
     UserService userService;
-    @Resource
-    BookService bookService;
+    
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
@@ -31,8 +27,6 @@ public class LoginController {
                 isAdmin = userService.isAdmin(username);
                 session.setAttribute("admin", isAdmin ? "1" : "0");
                 session.setAttribute("username", username);
-                List<Book> allBooks = bookService.getAllBooks();
-                session.setAttribute("bookList", allBooks);
                 return "redirect:/store";
             } else {
                 throw new RuntimeException("用户名或密码错误");
@@ -47,6 +41,7 @@ public class LoginController {
             return "redirect:/login";
         }
     }
+    
     @RequestMapping(value = "/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("errorMessage");
