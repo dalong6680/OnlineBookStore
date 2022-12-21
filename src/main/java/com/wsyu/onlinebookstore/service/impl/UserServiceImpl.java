@@ -6,6 +6,7 @@ import com.wsyu.onlinebookstore.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,5 +36,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changePassword(String username, String password) {
         userMapper.updateUserByUsername(username, password);
+    }
+    
+    @Override
+    public List<User> getAllUserList() {
+        return userMapper.selectList();
     }
 }

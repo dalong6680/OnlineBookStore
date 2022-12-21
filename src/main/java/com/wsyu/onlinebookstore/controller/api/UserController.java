@@ -22,6 +22,6 @@ public class UserController {
         String username = (String) session.getAttribute("username");
         messageService.addMessage(username, message);
         session.setAttribute("message", "留言成功！");
-        return "redirect:/store";
+        return "redirect:/user/store";
     }
 }

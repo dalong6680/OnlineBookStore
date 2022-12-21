@@ -36,25 +36,29 @@ public class UserPageController {
     @RequestMapping("/store")
     public String store(@RequestParam(required = false) Integer flushBookList, HttpSession session) {
         String username = (String) session.getAttribute("username");
-        List<Message> messageListByUsername = messageService.getMessageListByUsername(username);
         List<Book> allBookList = bookService.getAllBookList();
         List<CartDetail> fullCartListByUsername = cartService.getFullCartListByUsername(username);
         session.setAttribute("cartList", fullCartListByUsername);
-        session.setAttribute("messageList", messageListByUsername);
         if (flushBookList == null || flushBookList == 1) {
             session.setAttribute("bookList", allBookList);
         }
         return "/user/store";
     }
     
-    @RequestMapping("/myOrderList")
+    @RequestMapping("/myOrder")
     public String myOrderList(HttpSession session) {
         String username = (String) session.getAttribute("username");
         List<OrderDetail> orderListByUsername = orderService.getOrderListByUsername(username);
         session.setAttribute("orderList", orderListByUsername);
-        return "/user/myOrderList";
+        return "/user/myOrder";
     }
-    
+    @RequestMapping("/myMessage")
+    public String myMessage(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        List<MessageDetail> messageListByUsername = messageService.getMessageListByUsername(username);
+        session.setAttribute("messageList", messageListByUsername);
+        return "/user/myMessage";
+    }
     @RequestMapping("/orderSuccess")
     public String orderSuccess() {
         return "/user/orderSuccess";

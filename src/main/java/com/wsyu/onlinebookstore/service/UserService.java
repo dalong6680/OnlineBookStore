@@ -1,5 +1,9 @@
 package com.wsyu.onlinebookstore.service;
 
+import com.wsyu.onlinebookstore.entity.User;
+
+import java.util.List;
+
 public interface UserService {
     boolean login(String username, String password);
     
@@ -7,4 +11,5 @@ public interface UserService {
     
     boolean isAdmin(String username);
     void changePassword(String username, String password);
+    List<User> getAllUserList();
 }

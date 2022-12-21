@@ -7,11 +7,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>订单提交成功</title>
+    <title>我的订单</title>
     <link rel="stylesheet" href="../static/bs/css/bootstrap.css">
     <script type="text/javascript" src="../static/bs/js/jquery.min.js"></script>
     <script type="text/javascript" src="../static/bs/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../static/js/book/landing.js"></script>
     <link href="../static/css/book/head_footer.css" rel="stylesheet" type="text/css">
 </head>
 <body>

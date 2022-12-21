@@ -2,6 +2,7 @@ package com.wsyu.onlinebookstore.controller.api;
 
 import com.wsyu.onlinebookstore.entity.Book;
 import com.wsyu.onlinebookstore.service.BookService;
+import com.wsyu.onlinebookstore.service.MessageService;
 import com.wsyu.onlinebookstore.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +18,13 @@ public class AdminController {
     UserService userService;
     @Resource
     BookService bookService;
+    @Resource
+    MessageService messageService;
     
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
-    public void alterUserInformation(@RequestParam String username, @RequestParam String password) {
+    public String alterUserInformation(@RequestParam String username, @RequestParam String password) {
         userService.changePassword(username, password);
+        return "redirect:/manage/userManage";
     }
     
     @RequestMapping("/addBook")
@@ -29,23 +33,21 @@ public class AdminController {
                           @RequestParam double price,
                           @RequestParam int stock) {
         bookService.addBook(name, writer, price, stock);
-        return "redirect:";
-    }
-    
-    @RequestMapping("/addBookStock")
-    public String addBookStock(@RequestParam String name, @RequestParam int stock) {
-        Book book = bookService.getBookListByName(name).get(0);
-        int currentStock = book.getStock();
-        bookService.updateBook(name, name, book.getWriter(), book.getPrice(), currentStock + stock);
-        return "redirect:";
+        return "redirect:/manage/addBook";
     }
     
     @RequestMapping("/changeBook")
-    public String alterBookInformation(@RequestParam String name,
+    public String alterBookInformation(@RequestParam int bookId,
+                                       @RequestParam String name,
                                        @RequestParam String writer,
                                        @RequestParam double price,
                                        @RequestParam int stock) {
-        bookService.addBook(name, writer, price, stock);
-        return "redirect:";
+        bookService.updateBook(bookId, name, writer, price, stock);
+        return "redirect:/manage/bookManage";
+    }
+    @RequestMapping("/replyMessage")
+    public String replyMessage(@RequestParam int messageId, @RequestParam String reply) {
+        messageService.replyMessage(reply, messageId);
+        return "redirect:/manage/messageManage";
     }
 }

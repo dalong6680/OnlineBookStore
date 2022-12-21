@@ -1,5 +1,4 @@
 <%@page import="java.util.List" %>
-<%@page import="java.util.ArrayList" %>
 <%@ page import="com.wsyu.onlinebookstore.entity.CartDetail" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
@@ -11,12 +10,7 @@
     <link rel="stylesheet" href="../static/bs/css/bootstrap.css">
     <script type="text/javascript" src="../static/bs/js/jquery.min.js"></script>
     <script type="text/javascript" src="../static/bs/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../static/js/book/landing.js"></script>
     <link href="../static/css/book/head_footer.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="../static/js/book/addcart.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/bs/validform/style.css">
-    <script type="text/javascript" src="../static/bs/validform/Validform_v5.3.2_min.js"></script>
-    <script type="text/javascript" src="../static/js/book/user_reg_login.js"></script>
     <style>
         .wrapper {
             minheight: 400px;
@@ -61,34 +55,31 @@
                         List<CartDetail> cartList = (List<CartDetail>) session.getAttribute("cartList");
                         for (CartDetail cart : cartList) {
                     %>
-                    <tr class="row" id="pro-tr-<%= cart.getSerial_no()%>">
+                    <tr class="row" id="pro-tr-<%= cart.getCart_id()%>">
                         <td>
                             <div class="col-md-8">
                                 <p><%= cart.getName()%>---<%= cart.getWriter()%>
                                 </p>
                             </div>
                         </td>
-                        <td>￥<i id="price-<%= cart.getSerial_no()%>"><%= cart.getPrice()%>
+                        <td>￥<i id="price-<%= cart.getCart_id()%>"><%= cart.getPrice()%>
                         </i></td>
                         <td>
                             <div class="spinner">
-                                <span onclick="changeVal(<%= cart.getCart_id()%>, <%= cart.getSerial_no()%>, -1)"
+                                <span onclick="changeVal(<%= cart.getCart_id()%>, -1)"
                                       class="btn btn-xs btn-default">
                                     <b>-</b>
                                 </span>
-                                <input type="text" id="count-<%= cart.getSerial_no()%>" value="<%= cart.getCount()%>"
-                                       onchange="changeInput(this, <%= cart.getCart_id()%>, <%= cart.getSerial_no()%>)">
-                                <span onclick="changeVal(<%= cart.getCart_id()%>, <%= cart.getSerial_no()%>, 1)"
+                                <input type="text" id="count-<%= cart.getCart_id()%>" value="<%= cart.getCount()%>"
+                                       onchange="changeInput(this,<%= cart.getCart_id()%>)">
+                                <span onclick="changeVal(<%= cart.getCart_id()%>, 1)"
                                       class="btn btn-xs btn-default">
                                     <b>+</b>
 								</span>
                             </div>
                         </td>
-                        <script>
-                            calcPrice(<%= cart.getSerial_no()%>);
-                        </script>
                         <td style="color:red;font-size:20px;">￥<i class="subtotal"
-                                                                  id="subtotal-<%= cart.getSerial_no()%>">0.00</i></td>
+                                                                  id="subtotal-<%= cart.getCart_id()%>">0.00</i></td>
                         <td><a class="btn btn-danger btn-sm"
                                href="${pageContext.request.contextPath}/api/cart/deCart?cartId=<%= cart.getCart_id()%>"
                                onClick="return confirm('确定要删除此项了么？')">删除</a></td>
@@ -130,20 +121,31 @@
 </div>
 
 <script type="text/javascript">
-    function changeVal(cartId, id, delta) {
+    $(document).ready(function () {
+        <%
+        for (CartDetail cart : cartList) {
+        %>
+        calcPrice(<%= cart.getCart_id() %>)
+        <%
+        }
+        %>
+        calcTotalPrice()
+    })
+
+    function changeVal(id, delta) {
         var input = document.getElementById("count-" + id);
         num = parseInt(input.value)
         num += parseInt(delta);
         input.value = num;
-        updateCart(cartId, input.value);
+        updateCart(id, input.value);
         calcPrice(id);
     }
 
     //输入框处理
-    function changeInput(obj, cartId, id) {
+    function changeInput(obj, id) {
         var val = parseInt(obj.value);
         calcPrice(id);
-        updateCart(cartId, val);
+        updateCart(id, val);
     }
 
     function calcPrice(id) {
@@ -158,13 +160,13 @@
         var subtotals = document.getElementsByClassName("subtotal");
         var total = 0;
         for (const subtotal of subtotals) {
-            total += parseInt(subtotal.innerHTML)
+            total += parseFloat(subtotal.innerHTML)
         }
         document.getElementById("totalPrice").innerHTML = total;
     }
 
-    function updateCart(cartId, val) {
-        $.get("${pageContext.request.contextPath}/api/cart/updateCart?cartId=" + cartId + "&newCount=" + val);
+    function updateCart(id, val) {
+        $.get("${pageContext.request.contextPath}/api/cart/updateCart?cartId=" + id + "&newCount=" + val);
     }
 </script>
 </body>

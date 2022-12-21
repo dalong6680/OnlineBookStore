@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<script type="text/javascript" src="../static/js/book/landing.js"></script>
 <div class="head">
     <div class="top">
         <div class="container">
@@ -25,8 +26,8 @@
                         ${sessionScope.username} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="${pageContext.request.contextPath}/user/myOrderList">我的订单</a></li>
-                        <li><a href="#">我的资料</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/myOrder">我的订单</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/myMessage">我的留言</a></li>
                         <li><a style="border-top:1px #ccc solid" href="${pageContext.request.contextPath}/api/logout"
                                onClick="return confirm('确定要退出登陆了么？')">退出登录</a></li>
                     </ul>

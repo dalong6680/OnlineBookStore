@@ -21,7 +21,7 @@ public interface CartMapper {
             "FROM cart AS t0\n" +
             "LEFT OUTER JOIN book AS t1\n" +
             "ON (t1.book_id = t0.book_id)\n" +
-            "WHERE (t0.user_id = 1)\n")
+            "WHERE (t0.user_id = #{user_id})\n")
     List<CartDetail> selectFullCartListByUserId(@Param("user_id") int user_id);
     
     @Update("UPDATE cart SET count = #{newCount} WHERE cart_id = #{cart_id}")

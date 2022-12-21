@@ -11,11 +11,7 @@
     <script type="text/javascript" src="../static/bs/js/jquery.min.js"></script>
     <script type="text/javascript" src="../static/bs/js/bootstrap.js"></script>
     <link href="../static/css/book/head_footer.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="../static/js/book/getCatalog.js"></script>
-    <script type="text/javascript" src="../static/js/book/index.js"></script>
-    <script type="text/javascript" src="../static/js/book/landing.js"></script>
     <link rel="stylesheet" href="../static/css/book/index.css"/>
-    <script type="text/javascript" src="../static/js/book/addcart.js"></script>
     <style type="text/css">
         .dropdown-menu {
             margin: 0;
@@ -138,6 +134,23 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="pro col-md-12">
+                        <h3>留言版</h3>
+                        <div class="container">
+                            <form action="${pageContext.request.contextPath}/api/user/addMessage" role="form">
+                                <div class="form-group">
+                                    <label>
+                                        <textarea class="form-control" rows="3" name="message"
+                                                  placeholder="请输入留言"></textarea>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">提交</button>
+                                    <button type="reset" class="btn btn-warning">重置</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,35 +174,6 @@
         </div>
     </div>
 </div>
-
-<%--<table>--%>
-<%--    <tr>--%>
-<%--        <th>名称</th>--%>
-<%--        <th>作者</th>--%>
-<%--        <th>价格</th>--%>
-<%--        <th>库存</th>--%>
-<%--    </tr>--%>
-
-
-<%--    <%--%>
-<%--        List<Book> bookList = (List<Book>) session.getAttribute("bookList");--%>
-<%--        for (Book book : bookList) {--%>
-<%--    %>--%>
-<%--    <tr>--%>
-<%--        <td><%= book.getName() %>--%>
-<%--        </td>--%>
-<%--        <td><%= book.getWriter() %>--%>
-<%--        </td>--%>
-<%--        <td><%= book.getPrice() %>--%>
-<%--        </td>--%>
-<%--        <td><%= book.getStock() %>--%>
-<%--        </td>--%>
-<%--    </tr>--%>
-<%--    <%--%>
-<%--        }--%>
-<%--    %>--%>
-<%--</table>--%>
-
 <!--弹窗盒子end -->
 </body>
 </html>

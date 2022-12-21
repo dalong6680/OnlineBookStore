@@ -24,14 +24,8 @@ public class BookServiceImpl implements BookService {
     }
     
     @Override
-    public void updateBook(String oldName, String name, String writer, double price, int stock) {
-        bookMapper.updateBook(oldName, name, writer, price, stock);
-    }
-    
-    @Override
-    public void updateBookStock(String name, int stock) {
-        Book book = bookMapper.selectBookListByName(name).get(0);
-        bookMapper.updateBook(name, name, book.getWriter(), book.getPrice(), stock);
+    public void updateBook(int bookId, String name, String writer, double price, int stock) {
+        bookMapper.updateBook(bookId, name, writer, price, stock);
     }
     
     @Override

@@ -1,14 +1,11 @@
 package com.wsyu.onlinebookstore.controller.api;
 
-import com.wsyu.onlinebookstore.entity.Order;
 import com.wsyu.onlinebookstore.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("/api/order")
@@ -28,6 +25,6 @@ public class OrderController {
         }
         session.setAttribute("message", "下单成功！");
         session.removeAttribute("cartList");
-        return "redirect:/user/cart";
+        return "redirect:/user/orderSuccess";
     }
 }

@@ -24,9 +24,11 @@ public class LoginController {
             boolean res = userService.login(username, password);
             boolean isAdmin;
             if (res) {
-                isAdmin = userService.isAdmin(username);
-                session.setAttribute("admin", isAdmin ? "1" : "0");
                 session.setAttribute("username", username);
+                isAdmin = userService.isAdmin(username);
+                if (isAdmin) {
+                    return "redirect:/manage/index";
+                }
                 return "redirect:/user/store";
             } else {
                 throw new RuntimeException("用户名或密码错误");
@@ -44,8 +46,7 @@ public class LoginController {
     
     @RequestMapping(value = "/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("errorMessage");
-        session.removeAttribute("username");
+        session.invalidate();
         return "redirect:/login";
     }
 }

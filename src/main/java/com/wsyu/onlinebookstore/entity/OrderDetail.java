@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class OrderDetail {
     int order_id;
+    String username;
     String name;
     String writer;
     double price;
