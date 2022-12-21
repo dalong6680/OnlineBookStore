@@ -21,20 +21,7 @@ public class UserController {
     public String addMessage(@RequestParam String message, HttpSession session) {
         String username = (String) session.getAttribute("username");
         messageService.addMessage(username, message);
-        session.setAttribute("message", "添加购物车成功！");
+        session.setAttribute("message", "留言成功！");
         return "redirect:/store";
-    }
-    @RequestMapping("/createOrder")
-    public String createOrder(HttpSession session) {
-        String username = (String) session.getAttribute("username");
-        try {
-            orderService.addOrder(username);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            session.setAttribute("errorMessage", e.getCause());
-            return "redirect:/cart";
-        }
-        session.setAttribute("message", "下单成功！");
-        return "redirect:/cart";
     }
 }

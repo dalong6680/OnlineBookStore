@@ -32,11 +32,11 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     }
     
     //配置拦截器
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MainInterceptor())
-                .excludePathPatterns("/api/login", "/api/register", "/login", "/register");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new MainInterceptor())
+//                .excludePathPatterns("/api/login", "/api/register", "/login", "/register");
+//    }
 //
 //    //配置异常解析器
 //    @Override

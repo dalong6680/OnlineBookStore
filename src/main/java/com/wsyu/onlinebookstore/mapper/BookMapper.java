@@ -2,7 +2,6 @@ package com.wsyu.onlinebookstore.mapper;
 
 import com.wsyu.onlinebookstore.entity.Book;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -24,5 +23,12 @@ public interface BookMapper {
     Book selectBookByBookId(@Param("book_id") int book_id);
     
     @Update("UPDATE book SET stock = stock - #{count} WHERE book_id = #{book_id}")
-    void updateBookByBookId(@Param("count") int count, @Param("book_id") int book_id);
+    void updateBookByBookIdAndCount(@Param("count") int count, @Param("book_id") int book_id);
+    
+    @Update("UPDATE book SET name = #{name}, writer = #{writer}, price = #{price}, stock = #{stock} WHERE name = #{oldName}")
+    void updateBook(@Param("oldName") String oldName,
+                    @Param("name") String name,
+                    @Param("writer") String writer,
+                    @Param("price") double price,
+                    @Param("stock") int stock);
 }

@@ -29,7 +29,7 @@ public class OrderServiceImplTest {
     
     @Test
     public void addOrder() {
-        List<Cart> cartByUsername = cartService.getCartByUsername("admin");
+        List<Cart> cartByUsername = cartService.getCartListByUsername("admin");
         List<Integer> serial_no_list = new ArrayList<>();
         for (Cart cart : cartByUsername) {
             serial_no_list.add(cart.getSerial_no());

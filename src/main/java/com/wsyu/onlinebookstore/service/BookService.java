@@ -9,5 +9,8 @@ public interface BookService {
     
     List<Book> getAllBookList();
     
+    void updateBook(String oldName, String name, String writer, double price, int stock);
+    void updateBookStock(String name, int stock);
+    
     List<Book> getBookListByName(String name);
 }

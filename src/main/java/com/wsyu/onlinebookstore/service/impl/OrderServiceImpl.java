@@ -2,6 +2,7 @@ package com.wsyu.onlinebookstore.service.impl;
 
 import com.wsyu.onlinebookstore.entity.Cart;
 import com.wsyu.onlinebookstore.entity.Order;
+import com.wsyu.onlinebookstore.entity.OrderDetail;
 import com.wsyu.onlinebookstore.entity.User;
 import com.wsyu.onlinebookstore.mapper.BookMapper;
 import com.wsyu.onlinebookstore.mapper.CartMapper;
@@ -34,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
         List<Cart> cartList = cartMapper.selectCartListByUserId(user.getUser_id());
         for (Cart cart : cartList) {
             if (bookMapper.selectBookByBookId(cart.getBook_id()).getStock() > cart.getCount()) {
-                bookMapper.updateBookByBookId(cart.getCount(), cart.getBook_id());
+                bookMapper.updateBookByBookIdAndCount(cart.getCount(), cart.getBook_id());
             } else {
                 throw new RuntimeException(bookMapper.selectBookByBookId(cart.getBook_id()).getName() + "库存不足，购买失败！");
             }
@@ -44,7 +45,12 @@ public class OrderServiceImpl implements OrderService {
     }
     
     @Override
-    public List<Order> getOrderListByUsername(String username) {
-        return orderMapper.selectOrderListByUserId(userMapper.selectUserByUsername(username).getUser_id());
+    public List<OrderDetail> getOrderListByUsername(String username) {
+        return orderMapper.selectFullOrderListByUsername(username);
+    }
+    
+    @Override
+    public List<OrderDetail> getAllOrderList() {
+        return  orderMapper.selectFullOrderList();
     }
 }

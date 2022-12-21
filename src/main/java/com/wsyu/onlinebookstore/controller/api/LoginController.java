@@ -27,7 +27,7 @@ public class LoginController {
                 isAdmin = userService.isAdmin(username);
                 session.setAttribute("admin", isAdmin ? "1" : "0");
                 session.setAttribute("username", username);
-                return "redirect:/store";
+                return "redirect:/user/store";
             } else {
                 throw new RuntimeException("用户名或密码错误");
             }

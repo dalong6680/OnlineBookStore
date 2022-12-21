@@ -1,6 +1,7 @@
 package com.wsyu.onlinebookstore.service.impl;
 
 import com.wsyu.onlinebookstore.entity.Cart;
+import com.wsyu.onlinebookstore.entity.CartDetail;
 import com.wsyu.onlinebookstore.mapper.BookMapper;
 import com.wsyu.onlinebookstore.mapper.CartMapper;
 import com.wsyu.onlinebookstore.mapper.UserMapper;
@@ -44,12 +45,22 @@ public class CartServiceImpl implements CartService {
         }
     }
     
-    public List<Cart> getCartByUsername(String username) {
+    public List<Cart> getCartListByUsername(String username) {
         return cartMapper.selectCartListByUserId(userMapper.selectUserByUsername(username).getUser_id());
+    }
+    
+    @Override
+    public List<CartDetail> getFullCartListByUsername(String username) {
+        return cartMapper.selectFullCartListByUserId(userMapper.selectUserByUsername(username).getUser_id());
     }
     
     @Override
     public void removeCartByCartId(int cart_id) {
         cartMapper.deleteCartByCartId(cart_id);
+    }
+    
+    @Override
+    public void updateCartByCartIdAndCount(int cart_id, int newCount) {
+        cartMapper.updateCartByCartIdAndCount(cart_id, newCount);
     }
 }
